@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Register Here</h1>
+    <div>
+        <form method="POST">
+            {{form.hidden_tag()}}
+            <div style="margin-top: 20px"></div>
+            <div>
+                {{ form.name (class='getinput', placeholder='Name') }}
+                {% for error in form.name.errors %}
+                    <span style="color:red; font-size: 14px;">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div>
+                {{ form.sid (class='getinput', placeholder='SID') }}
+                {% for error in form.sid.errors %}
+                    <span style="color:red; font-size: 14px;">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div>
+                {{ form.email (class='getinput', placeholder='Email Id') }}
+                {% for error in form.email.errors %}
+                    <span style="color:red; font-size: 14px;">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div>
+                {{ form.phone (class='getinput', placeholder='Phone') }}
+                {% for error in form.phone.errors %}
+                    <span style="color:red; font-size: 14px;">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div>
+                {{ form.password (class='getinput', placeholder='Password') }}
+                {% for error in form.password.errors %}
+                    <span style="color:red; font-size: 14px;">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div>
+                {{ form.guardianname (class='getinput', placeholder='guardianname') }}
+                {% for error in form.guardianname.errors %}
+                    <span style="color:red; font-size: 14px;">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div>
+                {{ form.guardianphone (class='getinput', placeholder='guardianphone') }}
+                {% for error in form.guardianphone.errors %}
+                    <span style="color:red; font-size: 14px;">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div>
+                {{ form.address (class='getinput', placeholder='address') }}
+                {% for error in form.address.errors %}
+                    <span style="color:red; font-size: 14px;">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            {{form.batch.label}}
+            {{form.batch(class="custom-select")}}
+
+            {{ form.submit (class="btn-get-started") }}
+        </form>
+    </div>
+{% endblock %}
+

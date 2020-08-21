@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block nav %}
+	<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    	<div class="container">
+      		<a class="navbar-brand mr-4" href="{{url_for('facultyhome')}}">PEC</a>
+      		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+  			</button>
+  			<div class="collapse navbar-collapse" id="navbarToggle">
+    			<div class="navbar-nav mr-auto">
+      				<a class="nav-item nav-link" href="{{url_for('facultyhome')}}">Home</a>
+		        </div>
+    			<!-- Navbar Right Side -->
+    			<div class="navbar-nav">
+     				<a class="nav-item nav-link" href="{{url_for('facultyprofile')}}">{{name}}</a>
+       				<a class="nav-item nav-link" href="{{url_for('logout')}}">Logout</a>
+    			</div>
+  			</div>
+    	</div>
+  	</nav>
+{% endblock %} 
+
+
+{% block content %}
+{% if post %}
+    <legend style="margin-left: 20px">Complaints</legend>
+    {% for x in post %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="static/img/profile_pics/{{x[9]}}">      
+          <div class="media-body">
+            <div class="article-metadata">
+                <p>
+                    <div class="mr-2">
+                        <strong>{{ x[7] }}</strong>
+                        <small class="text-muted" style="margin-left: 20px">{{ x[3].strftime('%Y-%m-%d') }}</small>
+                        {% if x[10] %}
+                          <a class="btn btn-success btn-sm m-2" href="{{url_for('response', qno=x[0])}}">Check Response</a>
+                          {% else %}
+                          <a class="btn btn-primary btn-sm m-2" href="{{url_for('response', qno=x[0])}}">Respond</a>
+                        {% endif %}
+                    </div>
+                </p>  
+            </div>
+            <h5><p class="article-title">{{ x[5] }}</p></h5>
+            <p class="article-content" style="white-space: pre-line; word-break: break-all;">{{ x[2] }}</p>
+        </div>
+        </article>
+          
+    {% endfor %}
+{% endif %}   
+{% endblock %}
+
+{% block rightcontent %}
+
+    <div class="content-section">
+            <h3>Quick Links</h3>
+            <p class='text-muted'>
+              <ul class="list-group">
+                <a class="nav-item nav-link list-group-item list-group-item-light" href="{{url_for('announcement')}}">Announcements</a>
+                {% if session['designation'] != 'Admin' %}
+                <a class="nav-item nav-link list-group-item list-group-item-light" href="{{url_for('allotmentcriteria')}}">Allotment Criteria</a>
+                {% endif %}
+                {% if session['designation'] != 'Admin' %}
+                <a class="nav-item nav-link list-group-item list-group-item-light" href="{{url_for('showrooms')}}">Reset Criteria</a>
+                <a class="nav-item nav-link list-group-item list-group-item-light" href="{{url_for('deallocaterooms')}}">Deallocate Room</a>
+                {% endif %}
+                {% if session['designation'] != 'Admin' %}
+                <a class="nav-item nav-link list-group-item list-group-item-light" href="{{url_for('uploadfile')}}">Upload List</a>
+                {% endif %}
+                <a class="nav-item nav-link list-group-item list-group-item-light" href="{{url_for('showqueries')}}">Student Queries</a>
+                {% if session['designation'] == 'Admin' %}
+                <a class="nav-item nav-link list-group-item list-group-item-light" href="{{url_for('downloadlist',hostel='Himalaya')}}">Download Himalaya's List</a>
+                <a class="nav-item nav-link list-group-item list-group-item-light" href="{{url_for('downloadlist',hostel='Shivalik')}}">Download Shivalik's List</a>
+                {% endif %}
+              </ul>
+            </p>
+          </div>
+{% endblock %}

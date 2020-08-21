@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Hostel Allocation</h1>
+    <br>
+    <div >
+      <a href="{{url_for('slogin')}}" class ="btn-get-started" >STUDENT</a>
+      <a href="{{url_for('flogin')}}" class ="btn-get-started" >FACULTY</a>
+    </div>
+{% endblock %}
